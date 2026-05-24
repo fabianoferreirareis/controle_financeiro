@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle Financeiro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="app">
+
+    <header class="topo">
+        <h1>Controle Financeiro</h1>
+        <p>Entradas, saídas, cálculos e gráficos financeiros</p>
+    </header>
+
+    <nav class="abas">
+        <button onclick="abrirAba('dashboard')" class="ativo">Dashboard</button>
+        <button onclick="abrirAba('entradas')">Entradas</button>
+        <button onclick="abrirAba('saidas')">Saídas</button>
+        <button onclick="abrirAba('calculos')">Cálculos</button>
+        <button onclick="abrirAba('graficos')">Gráficos</button>
+    </nav>
+
+    <section id="dashboard" class="aba ativa">
+        <div class="cards">
+            <div class="card entrada">
+                <span>Entradas</span>
+                <h2 id="totalEntradas">R$ 0,00</h2>
+            </div>
+
+            <div class="card saida">
+                <span>Saídas</span>
+                <h2 id="totalSaidas">R$ 0,00</h2>
+            </div>
+
+            <div class="card lucro">
+                <span>Lucro</span>
+                <h2 id="lucroLiquido">R$ 0,00</h2>
+            </div>
+
+            <div class="card saldo">
+                <span>Saldo Atual</span>
+                <h2 id="saldoAtual">R$ 0,00</h2>
+            </div>
+        </div>
+    </section>
+
+    <section id="entradas" class="aba">
+        <h2>Entrada de Valores</h2>
+
+        <form class="formulario" onsubmit="salvarEntrada(event)">
+            <input type="date" id="entradaData" required>
+            <input type="text" id="entradaDescricao" placeholder="Descrição" required>
+
+            <select id="entradaCategoria">
+                <option value="Venda">Venda</option>
+                <option value="Serviço">Serviço</option>
+                <option value="Investimento">Investimento</option>
+                <option value="Outros">Outros</option>
+            </select>
+
+            <select id="entradaForma">
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Pix">Pix</option>
+                <option value="Cartão">Cartão</option>
+                <option value="Boleto">Boleto</option>
+                <option value="Transferência">Transferência</option>
+            </select>
+
+            <input type="number" id="entradaValor" placeholder="Valor" step="0.01" required>
+
+            <textarea id="entradaObservacao" placeholder="Observação"></textarea>
+
+            <button type="submit">Salvar Entrada</button>
+        </form>
+    </section>
+
+    <section id="saidas" class="aba">
+        <h2>Saídas</h2>
+
+        <form class="formulario" onsubmit="salvarSaida(event)">
+            <input type="date" id="saidaData" required>
+            <input type="text" id="saidaDescricao" placeholder="Descrição" required>
+
+            <select id="saidaTipo">
+                <option value="Fornecedor">Fornecedor</option>
+                <option value="Funcionário">Funcionário</option>
+                <option value="Imposto">Imposto</option>
+                <option value="Aluguel">Aluguel</option>
+                <option value="Energia">Energia</option>
+                <option value="Água">Água</option>
+                <option value="Internet">Internet</option>
+                <option value="Manutenção">Manutenção</option>
+                <option value="Estoque">Estoque</option>
+                <option value="Produção">Produção</option>
+                <option value="Outros">Outros</option>
+            </select>
+
+            <select id="saidaForma">
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Pix">Pix</option>
+                <option value="Cartão">Cartão</option>
+                <option value="Boleto">Boleto</option>
+                <option value="Transferência">Transferência</option>
+            </select>
+
+            <input type="number" id="saidaValor" placeholder="Valor" step="0.01" required>
+
+            <textarea id="saidaObservacao" placeholder="Observação"></textarea>
+
+            <button type="submit">Salvar Saída</button>
+        </form>
+    </section>
+
+    <section id="calculos" class="aba">
+        <h2>Cálculos Financeiros</h2>
+
+        <div class="calculos">
+            <p><strong>Total de Entradas:</strong> <span id="calcEntradas">R$ 0,00</span></p>
+            <p><strong>Total de Saídas:</strong> <span id="calcSaidas">R$ 0,00</span></p>
+            <p><strong>Lucro Líquido:</strong> <span id="calcLucro">R$ 0,00</span></p>
+            <p><strong>Margem:</strong> <span id="calcMargem">0%</span></p>
+        </div>
+    </section>
+
+    <section id="graficos" class="aba">
+        <h2>Gráficos</h2>
+
+        <div class="grafico">
+            <canvas id="graficoFinanceiro"></canvas>
+        </div>
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
